@@ -1,0 +1,20 @@
+/* --color-error marca a caixa (borda e barra lateral). A mensagem usa a cor de texto comum,
+   porque o vermelho como cor de texto não tem contraste suficiente sobre o fundo. */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 16px;
+  text-align: center;
+  background: var(--color-error-surface);
+  border: 1px solid var(--color-error);
+  border-left-width: 4px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.error-state__message {
+  font-weight: 600;
+  color: var(--color-text);
+}

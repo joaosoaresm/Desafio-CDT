@@ -77,7 +77,12 @@ function UserModal({ user, onClose }: UserModalProps) {
           <dt>Cidade</dt>
           <dd>{user.address.city}</dd>
         </dl>
-        <button type="button" ref={closeButtonRef} onClick={onClose}>
+        <button
+          type="button"
+          className="button"
+          ref={closeButtonRef}
+          onClick={onClose}
+        >
           Fechar
         </button>
       </div>

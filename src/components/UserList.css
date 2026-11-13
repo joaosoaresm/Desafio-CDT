@@ -1,0 +1,108 @@
+.user-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Um bloco único por usuário, translúcido, com o fundo da página desfocado por trás. */
+.user-list__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 16px;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition:
+    transform 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.user-list__item:hover {
+  border-color: var(--glass-border-strong);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Círculo com as iniciais, só decorativo. */
+.user-list__avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--color-on-button);
+  background: linear-gradient(
+    135deg,
+    var(--color-button-start),
+    var(--color-button-end)
+  );
+  border-radius: 50%;
+}
+
+.user-list__info {
+  min-width: 0;
+}
+
+.user-list__name {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-strong);
+  text-align: left;
+  overflow-wrap: anywhere;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* A área de clique do botão cobre o card inteiro, para o cursor de mão valer em todo o bloco. */
+.user-list__name::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  border-radius: var(--radius);
+}
+
+/* O contorno de foco do teclado contorna o card, não só o texto do nome. */
+.user-list__name:focus-visible {
+  outline: none;
+}
+
+.user-list__name:focus-visible::after {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.user-list__email {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.user-list__email-icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}

@@ -1,0 +1,65 @@
+/* Rótulo oculto só visualmente: some da tela, mas continua sendo lido por leitores de tela. */
+.user-search__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.user-search__field {
+  position: relative;
+}
+
+/* Lupa à esquerda do campo, só decorativa. */
+.user-search__icon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: color 0.15s;
+}
+
+.user-search__field:focus-within .user-search__icon {
+  color: var(--color-focus);
+}
+
+.user-search__input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 18px 12px 46px;
+  font: inherit;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-deep) 70%, transparent);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 999px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.user-search__input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.user-search__input:hover {
+  border-color: var(--color-focus);
+}
+
+/* Brilho turquesa ao receber foco. */
+.user-search__input:focus-visible {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-focus) 28%, transparent),
+    0 0 22px color-mix(in srgb, var(--color-focus) 35%, transparent);
+}

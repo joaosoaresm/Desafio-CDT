@@ -7,6 +7,7 @@ import UserSearch from './components/UserSearch'
 import { useUsers } from './hooks/useUsers'
 import type { User } from './types/user'
 import { filterUsersByName } from './utils/filterUsers'
+import './App.css'
 
 function App() {
   const { users, loading, error, reload } = useUsers()
@@ -17,6 +18,10 @@ function App() {
   const hasSearchTerm = searchTerm.trim() !== ''
   const noResults =
     !loading && !error && hasSearchTerm && filteredUsers.length === 0
+
+  // O contador do cabeçalho só aparece quando a lista foi carregada.
+  const showUserCount = !loading && !error
+  const userCountLabel = `${users.length} ${users.length === 1 ? 'usuário' : 'usuários'}`
 
   function handleCloseModal() {
     setSelectedUser(null)
@@ -35,7 +40,7 @@ function App() {
       <>
         <UserSearch value={searchTerm} onChange={setSearchTerm} />
         {noResults ? (
-          <p>Nenhum usuário encontrado.</p>
+          <p className="empty-state">Nenhum usuário encontrado.</p>
         ) : (
           <UserList users={filteredUsers} onSelect={setSelectedUser} />
         )}
@@ -45,7 +50,15 @@ function App() {
 
   return (
     <>
-      <main>{renderContent()}</main>
+      <header className="site-header">
+        <div className="site-header__inner">
+          <h1 className="site-header__title">Desafio CDT</h1>
+          {showUserCount && (
+            <span className="site-header__count">{userCountLabel}</span>
+          )}
+        </div>
+      </header>
+      <main className="app">{renderContent()}</main>
       <UserModal user={selectedUser} onClose={handleCloseModal} />
     </>
   )

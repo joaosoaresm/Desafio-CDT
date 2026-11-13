@@ -1,68 +1,102 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* Paleta do projeto. */
+  --color-bg-top: #004c94;
+  --color-bg: #2d3f54;
+  --color-glow: #00d4c6;
+  --color-focus: #00d4c6;
+  --color-button-start: #006ecf;
+  --color-button-end: #028183;
+  --color-loading: #00d4c6;
+  --color-error: #e5484d;
+  --color-header-start: #004c94;
+  --color-header-end: #00d4c6;
+
+  /* Cores de apoio, escolhidas para manter o contraste de texto em pelo menos 4,5:1. */
+  --color-deep: #1a2532;
+  --color-text: #f5f8fb;
+  --color-text-strong: #ffffff;
+  --color-text-muted: #c9d6e3;
+  --color-on-button: #ffffff;
+  --color-error-surface: color-mix(in srgb, var(--color-error) 14%, var(--color-bg));
+  --color-backdrop: rgba(6, 14, 24, 0.65);
+
+  /* Superfície translúcida ("vidro") dos cards e painéis. */
+  --glass-bg: color-mix(in srgb, var(--color-bg) 60%, transparent);
+  --glass-border: color-mix(in srgb, var(--color-focus) 25%, transparent);
+  --glass-border-strong: color-mix(in srgb, var(--color-focus) 65%, transparent);
+  --glass-blur: blur(12px);
+
+  --shadow: rgba(0, 0, 0, 0.16) 0 2px 10px;
+  --shadow-hover: rgba(0, 0, 0, 0.28) 0 10px 24px -6px;
+  --shadow-lg:
+    rgba(0, 0, 0, 0.4) 0 20px 40px -12px, rgba(0, 0, 0, 0.22) 0 8px 16px -8px;
+  --radius: 14px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  font: 16px/1.5 var(--sans);
+  color-scheme: dark;
+  color: var(--color-text);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  /* Fundo: gradiente vertical com um brilho suave no canto superior direito, preso à janela. */
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--color-glow) 20%, transparent),
+      transparent 45vmax
+    ),
+    linear-gradient(180deg, var(--color-bg-top), var(--color-bg));
+  background-attachment: fixed;
 }
 
 body {
   margin: 0;
 }
 
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
 p {
   margin: 0;
+}
+
+/* Contorno de foco único para quem navega pelo teclado. */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Botão de ação, usado em "Tentar novamente" e "Fechar". */
+.button {
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-on-button);
+  background: linear-gradient(
+    90deg,
+    var(--color-button-start),
+    var(--color-button-end)
+  );
+  border: 0;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+/* Escurece no hover: o texto branco fica com mais contraste, nunca menos. */
+.button:hover {
+  filter: brightness(0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

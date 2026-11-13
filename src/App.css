@@ -1,0 +1,73 @@
+/* Cabeçalho da página.
+   O gradiente vai de --color-header-start até --color-header-end suavizado com a cor de fundo,
+   para o título continuar legível em toda a largura. */
+.site-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-header-start),
+    color-mix(in srgb, var(--color-header-end) 35%, var(--color-bg))
+  );
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  max-width: 760px;
+  min-height: 60px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  color: var(--color-text);
+}
+
+/* Contador de usuários: pílula escura e translúcida, para o texto manter o contraste. */
+.site-header__count {
+  flex: none;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  background: rgba(8, 18, 30, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+/* Coluna central da página. */
+.app {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+/* Mensagem de "Nenhum usuário encontrado." */
+.empty-state {
+  margin-top: 16px;
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--color-text-muted);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px dashed var(--glass-border-strong);
+  border-radius: var(--radius);
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding-top: 24px;
+  }
+}

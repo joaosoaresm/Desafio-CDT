@@ -7,10 +7,13 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--color-backdrop);
 }
 
+/* Mesmo bloco translúcido dos cards, mais opaco para o texto não disputar com a lista atrás. */
 .user-modal {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 420px;
   max-height: 100%;
@@ -18,23 +21,48 @@
   box-sizing: border-box;
   padding: 24px;
   text-align: left;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.user-modal h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  color: var(--color-text-strong);
+  overflow-wrap: anywhere;
 }
 
 .user-modal dl {
   margin: 16px 0 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border);
 }
 
 .user-modal dt {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
 }
 
 .user-modal dd {
   margin: 0 0 12px;
-  color: var(--text-h);
   overflow-wrap: anywhere;
+}
+
+.user-modal dd:last-child {
+  margin-bottom: 0;
+}
+
+.user-modal .button {
+  align-self: flex-end;
 }
