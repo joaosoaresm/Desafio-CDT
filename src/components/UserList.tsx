@@ -2,14 +2,17 @@ import type { User } from '../types/user'
 
 type UserListProps = {
   users: User[]
+  onSelect: (user: User) => void
 }
 
-function UserList({ users }: UserListProps) {
+function UserList({ users, onSelect }: UserListProps) {
   return (
     <ul>
       {users.map((user) => (
         <li key={user.id}>
-          <strong>{user.name}</strong>
+          <button type="button" onClick={() => onSelect(user)}>
+            {user.name}
+          </button>
           <p>{user.email}</p>
         </li>
       ))}
