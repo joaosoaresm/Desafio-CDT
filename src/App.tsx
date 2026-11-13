@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import ErrorState from './components/ErrorState'
+import LoadingState from './components/LoadingState'
 import UserList from './components/UserList'
 import UserModal from './components/UserModal'
 import UserSearch from './components/UserSearch'
@@ -7,7 +9,7 @@ import type { User } from './types/user'
 import { filterUsersByName } from './utils/filterUsers'
 
 function App() {
-  const { users, loading, error } = useUsers()
+  const { users, loading, error, reload } = useUsers()
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
 
@@ -20,16 +22,30 @@ function App() {
     setSelectedUser(null)
   }
 
-  return (
-    <>
-      <main>
+  function renderContent() {
+    if (loading) {
+      return <LoadingState />
+    }
+
+    if (error) {
+      return <ErrorState message={error} onRetry={reload} />
+    }
+
+    return (
+      <>
         <UserSearch value={searchTerm} onChange={setSearchTerm} />
         {noResults ? (
           <p>Nenhum usuário encontrado.</p>
         ) : (
           <UserList users={filteredUsers} onSelect={setSelectedUser} />
         )}
-      </main>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <main>{renderContent()}</main>
       <UserModal user={selectedUser} onClose={handleCloseModal} />
     </>
   )
