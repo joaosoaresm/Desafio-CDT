@@ -1,0 +1,13 @@
+import type { User } from '../types/user'
+
+const USERS_URL = 'https://jsonplaceholder.typicode.com/users'
+
+export async function fetchUsers(): Promise<User[]> {
+  const response = await fetch(USERS_URL)
+
+  if (!response.ok) {
+    throw new Error(`Erro ao buscar usuários (status ${response.status})`)
+  }
+
+  return (await response.json()) as User[]
+}
